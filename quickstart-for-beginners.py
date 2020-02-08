@@ -15,3 +15,24 @@ model = tf.keras.models.Sequential([
 
 predictions = model(x_train[:1]).numpy()
 print(predictions)
+
+probabilities = tf.nn.softmax(predictions).numpy()
+print(probabilities)
+
+loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+initial_loss = loss_fn(y_train[:1], predictions).numpy()
+print(initial_loss)
+
+model.compile(optimizer='adam', loss=loss_fn, metrics=['accuracy'])
+
+model.fit(x_train, y_train, epochs=5)
+
+model.evaluate(x_test,  y_test, verbose=2)
+
+probability_model = tf.keras.Sequential([
+    model,
+    tf.keras.layers.Softmax()
+])
+
+proability = probability_model(x_test[:5])
+print(proability)
