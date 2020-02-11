@@ -42,5 +42,5 @@ pip install --upgrade pandas
 pip install --upgrade numpy
 pip install --upgrade matplotlib
 pip install --upgrade Jupyter
-pip install --upgrade sklearn
+pip install -U scikit-learn
 ```
